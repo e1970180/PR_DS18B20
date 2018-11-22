@@ -1,0 +1,28 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PR_DS18B20	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setResolution		KEYWORD2
+
+setUpdatePeriod		KEYWORD2	
+loop				KEYWORD2	
+get					KEYWORD2
+
+
+######################################
+# Constants (LITERAL1)
+######################################
+
+PR_DS18B20_PRECISION_DEFAULT       		LITERAL1
+PR_DS18B20_UPDATE_PERIOD_DEF			LITERAL1

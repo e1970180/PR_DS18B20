@@ -8,18 +8,18 @@
 #include "PR_GetTau.hpp"
 
 #ifndef	PR_DS18B20_PRECISION_DEFAULT
-	#define	PR_DS18B20_PRECISION_DEFAULT		9		//[9 ...12]
+	#define	PR_DS18B20_PRECISION_DEFAULT		9		//[9...12]
 #endif
 
 #ifndef	PR_DS18B20_UPDATE_PERIOD_DEF
-	#define	PR_DS18B20_UPDATE_PERIOD_DEF		15		//[sek]
+	#define	PR_DS18B20_UPDATE_PERIOD_DEF		15		//[ms]
 #endif
 
 #ifndef	PR_DS18B20_INVALID_TEMPERATURE_VALUE
 	#define	PR_DS18B20_INVALID_TEMPERATURE_VALUE	-127	//[degC] returned value if no correct measured temperature available 
 #endif
 
-#define	DS18B20_CONV_TIME			2		//[sek]
+#define	DS18B20_CONV_TIME						2000	//[ms]
 
 class PR_DS18B20 {
         public:
