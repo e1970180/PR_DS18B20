@@ -46,7 +46,7 @@ class PR_DS18B20 {
 
 PR_DS18B20::PR_DS18B20( const uint8_t pin, const uint8_t resolution, const int16_t invalidTemp )
 	:	oneWire(pin), 
-		sensors(oneWire),		// Pass our oneWire reference to Dallas Temperature. 
+		sensors(&oneWire),		// Pass our oneWire reference to Dallas Temperature. 
 		_invalidTemp(invalidTemp)
 	{
 	sensors.begin();
