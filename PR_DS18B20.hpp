@@ -20,6 +20,7 @@ class PR_DS18B20 : public DallasTemperature {
 			PR_DS18B20(const uint8_t pin, const uint32_t updatePeriod = PR_DS18B20_UPDATE_PERIOD_DEF);
             
 			void	setUpdatePeriod(const uint32_t updatePeriod);
+			bool	request();
 			
 			float	loop();
 			float 	getC();
@@ -28,6 +29,9 @@ class PR_DS18B20 : public DallasTemperature {
 			OneWire         _oneWire;
 			float 			_lastMeasuredTemp;
 			uint32_t		_updatePeriod;			//[ms]
+			
+			bool 		_isRequested = false;
+			uint32_t	_lastTime = 0;
 			
 };
 
@@ -45,25 +49,31 @@ void	PR_DS18B20::setUpdatePeriod(const uint32_t updatePeriod) {	_updatePeriod = 
 
 float 	PR_DS18B20::getC()	{	return _lastMeasuredTemp;	}
 
+bool	PR_DS18B20::request() {
+	
+	if ( _isRequested ) return false;
+	
+	_lastTime -= _updatePeriod;	//force requestTemperatures() in loop()
+	loop();
+	return true;
+}
+
 float	PR_DS18B20::loop() {	
 
-	static bool 	isRequested = false;
-	static uint32_t	_lastTime = 0;
-	
-	if (isRequested) {
+	if (_isRequested) {
 		if ( PR_getTauMS(_lastTime) > millisToWaitForConversion(getResolution()) ) {
 				
 				_lastMeasuredTemp = getTempCByIndex(0);
 				if (_lastMeasuredTemp == DEVICE_DISCONNECTED_C) _lastMeasuredTemp = PR_DS18B20_INVALID_TEMPERATURE_VALUE;		
 				_lastTime = PR_getNowMS();
-				isRequested = false;
+				_isRequested = false;
 			}
 	}
 	else {
 		if ( PR_getTauMS(_lastTime) > _updatePeriod ) {
 				requestTemperatures();
 				_lastTime = PR_getNowMS();
-				isRequested = true;
+				_isRequested = true;
 		}
 	}
 	return _lastMeasuredTemp;
