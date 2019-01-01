@@ -17,11 +17,12 @@ setUpdatePeriod		KEYWORD2
 loop				KEYWORD2
 request				KEYWORD2
 getC				KEYWORD2
-
+getTimeStamp		KEYWORD2
 
 ######################################
 # Constants (LITERAL1)
 ######################################
 
-PR_DS18B20_PRECISION_DEFAULT       		LITERAL1
+PR_DS18B20_INVALID_TEMPERATURE_VALUE	LITERAL1
 PR_DS18B20_UPDATE_PERIOD_DEF			LITERAL1
+PR_DS18B20_NUMBER_OF_SENSORS			LITERAL1
